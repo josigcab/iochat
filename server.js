@@ -1,11 +1,8 @@
 const http = require('http');
 
-http.createServer((request, response) => {
-  if (request.method === 'POST' && request.url === '/') {
-    response.end("Match users");
-    request.pipe(response);
-  } else {
-    response.statusCode = 404;
-    response.end("Page not Found");
-  }
+http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    let url = { 'url': req.url }
+    res.write(JSON.stringify(url))
+    res.end();
 }).listen(5000);
